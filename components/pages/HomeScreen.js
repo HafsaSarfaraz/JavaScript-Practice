@@ -1,13 +1,24 @@
+import { useEffect, useState } from 'react';
 import React from 'react'
-import { StyleSheet, Text, View, Image, TextInput } from 'react-native';
+import { StyleSheet, Text, View, Image, TextInput, TouchableOpacity } from 'react-native';
 import { useFonts } from 'expo-font';
 import { MaterialIcons, Ionicons } from '@expo/vector-icons';
+import { FlatList } from 'react-native-gesture-handler';
 
 export default function HomeScreen() {
+    const arr=['h','a','f','s','a']
     const [fontsLoaded] = useFonts({
         'Poppins-Regular': require('../../assets/font/Poppins-Regular.ttf'),
         'Poppins-Bold': require('../../assets/font/Poppins-Bold.ttf')
     });
+    const [count, setCount] = useState(0);
+    function touch() {
+        setCount(count + 1);
+    }
+
+    useEffect(() => {
+        alert('hello here' + count)
+    }, [count])
     return (
         <View style={styles.container}>
             {/* Menue icon, text, text input, search icon */}
@@ -42,10 +53,10 @@ export default function HomeScreen() {
                 />
 
                 <Text style={{ fontFamily: 'Poppins-Regular', fontSize: 13, marginLeft: 14, marginTop: 10 }}>Honey lime Combo</Text>
-                <Text style={{ fontFamily: 'Poppins-Regular', fontSize: 13, marginLeft: 14, marginTop: 10 ,color:'#F08626'}}>$ 2,000</Text>
-                <Image 
-                source={require('../../assets/plus.png')}
-                style={{marginLeft:120, marginTop:-25}}
+                <Text style={{ fontFamily: 'Poppins-Regular', fontSize: 13, marginLeft: 14, marginTop: 10, color: '#F08626' }}>$ 2,000</Text>
+                <Image
+                    source={require('../../assets/plus.png')}
+                    style={{ marginLeft: 120, marginTop: -25 }}
                 />
             </View>
 
@@ -62,13 +73,32 @@ export default function HomeScreen() {
                 />
 
                 <Text style={{ fontFamily: 'Poppins-Regular', fontSize: 13, marginLeft: 10, marginTop: 10 }}>Berry Mango Combo</Text>
-                <Text style={{ fontFamily: 'Poppins-Regular', fontSize: 13, marginLeft: 14, marginTop: 10 ,color:'#F08626'}}>$ 2,000</Text>
-                <Image 
-                source={require('../../assets/plus.png')}
-                style={{marginLeft:120, marginTop:-25}}
-                />  
+                <Text style={{ fontFamily: 'Poppins-Regular', fontSize: 13, marginLeft: 14, marginTop: 10, color: '#F08626' }}>$ 2,000</Text>
+                <Image
+                    source={require('../../assets/plus.png')}
+                    style={{ marginLeft: 120, marginTop: -25 }}
+                />
             </View>
 
+            <TouchableOpacity style={{
+                backgroundColor: '#FFA451',
+                paddingVertical: 15,
+                paddingHorizontal: 79,
+                borderRadius: 8,
+                marginTop: 30,
+                alignSelf: 'center',
+            }}
+                onPress={touch}
+            ><Text>click me!</Text></TouchableOpacity>
+
+          <FlatList
+          data={arr}
+          renderItem={({item})=>(
+            <Text>{item}</Text>
+    )}
+          >
+
+          </FlatList>
         </View>
     )
 }

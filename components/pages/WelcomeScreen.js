@@ -1,9 +1,10 @@
-import { useState } from 'react';
+import { useState , useContext} from 'react';
 import { StyleSheet, Text, View, Button, Image, TouchableOpacity, } from 'react-native';
 import { useFonts } from 'expo-font';
-
+import { UserContext } from './UserContext';
 
 export default function WelcomeScreen({navigation}) {
+  let username= useContext(UserContext)
     const [fontsLoaded] = useFonts({
         'Poppins-Regular': require('../../assets/font/Poppins-Regular.ttf'),
         'Poppins-Bold': require('../../assets/font/Poppins-Bold.ttf')
@@ -32,6 +33,8 @@ export default function WelcomeScreen({navigation}) {
          >
            <Text style={{ color: 'white', fontFamily: 'Poppins-Bold' }}>Let's Continue</Text>
          </TouchableOpacity>
+
+         <Text style={{ marginTop: -190, fontSize: 16 }}>User: {username}</Text>
        </View>
   );
 }
